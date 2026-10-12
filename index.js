@@ -1,21 +1,24 @@
 require('dotenv').config();
-const path = require("path");
+
+const path = require('path');
 const express = require('express');
 const session = require('express-session');
-const app = express();
-const PORT = 3000;
-
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
-async function main() {async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/bookstore');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// MongoDB Connection
+async function main() {
+    await mongoose.connect(process.env.MONGO_URI);
 }
 
 main()
-.then(() => {console.log('DB Connected')})
-.catch((err) => {console.log(err)});
+    .then(() => console.log('DB Connected'))
+    .catch((err) => console.error('DB Connection Error:', err));
 
+// Book Schema
 const bookSchema = new mongoose.Schema({
     name: String,
     title: String,
@@ -26,21 +29,25 @@ const bookSchema = new mongoose.Schema({
 });
 
 const Book = mongoose.model('Book', bookSchema);
-app.set('views',path.join(__dirname,'views'))
-app.set('view engine','ejs')
-app.set(express.static(path.join(__dirname,'public')));
 
-app.use(express.static('public'))
-app.use(express.urlencoded({ extended: true }))
+// Express Setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+
+// Session Setup
 app.use(session({
-    secret: 'bookstore-session-secret-change-this',
+    secret: process.env.SESSION_SECRET || 'bookheaven-session-secret',
     resave: false,
     saveUninitialized: false,
     cookie: {
         maxAge: 24 * 60 * 60 * 1000
     }
 }));
+
+// Cart Count
 app.use((req, res, next) => {
     const cart = req.session.cart || [];
 
@@ -50,6 +57,8 @@ app.use((req, res, next) => {
 
     next();
 });
+
+// Email Setup
 const transport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -57,24 +66,37 @@ const transport = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS
     }
 });
-transport.verify((error, success) => {
+
+transport.verify((error) => {
     if (error) {
-        console.log("SMTP ERROR:", error);
+        console.error('SMTP ERROR:', error);
     } else {
-        console.log("SMTP server is ready");
+        console.log('SMTP server is ready');
     }
 });
-app.get('/',(req,res)=>{
-    res.render('home')
-})
-app.get('/about',(req,res)=>{
-    res.render('about')
-})
-app.get('/books', async (req, res) => {
-    const books = await Book.find();
-    res.render('books', { books });
+
+// Home
+app.get('/', (req, res) => {
+    res.render('home');
 });
 
+// About
+app.get('/about', (req, res) => {
+    res.render('about');
+});
+
+// All Books
+app.get('/books', async (req, res) => {
+    try {
+        const books = await Book.find();
+        res.render('books', { books });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error loading books');
+    }
+});
+
+// Add to Cart
 app.post('/cart/add/:id', async (req, res) => {
     try {
         const book = await Book.findById(req.params.id);
@@ -105,11 +127,12 @@ app.post('/cart/add/:id', async (req, res) => {
 
         res.redirect('/cart');
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).send('Error adding book to cart');
     }
 });
 
+// View Cart
 app.get('/cart', (req, res) => {
     const cart = req.session.cart || [];
 
@@ -120,6 +143,7 @@ app.get('/cart', (req, res) => {
     res.render('cart', { cart, total });
 });
 
+// Remove from Cart
 app.post('/cart/remove/:id', (req, res) => {
     const cart = req.session.cart || [];
 
@@ -130,7 +154,7 @@ app.post('/cart/remove/:id', (req, res) => {
     res.redirect('/cart');
 });
 
-
+// Update Cart Quantity
 app.post('/cart/update/:id', (req, res) => {
     const cart = req.session.cart || [];
     const item = cart.find(book => book.bookId === req.params.id);
@@ -154,19 +178,22 @@ app.post('/cart/update/:id', (req, res) => {
     res.redirect('/cart');
 });
 
-
+// Categories
 app.get('/category', async (req, res) => {
     try {
         const books = await Book.find();
-        const categories = [...new Set(books.map(book => book.category))];
+        const categories = [
+            ...new Set(books.map(book => book.category).filter(Boolean))
+        ];
 
         res.render('categories', { categories });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).send('Error loading categories');
     }
 });
 
+// Books by Category
 app.get('/category/:category', async (req, res) => {
     try {
         const books = await Book.find({
@@ -175,16 +202,17 @@ app.get('/category/:category', async (req, res) => {
 
         res.render('books', { books });
     } catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).send('Error loading books');
     }
 });
 
+// Contact Page
+app.get('/contact', (req, res) => {
+    res.render('contact');
+});
 
-app.get('/contact',(req,res)=>{
-    res.render('contact')
-})
-
+// Contact Form
 app.post('/contact', (req, res) => {
     const name = req.body.name;
     const email = req.body.email;
@@ -198,7 +226,9 @@ app.post('/contact', (req, res) => {
     }, (error, info) => {
         if (error) {
             console.error('EMAIL ERROR:', error);
-            return res.status(500).send('Email could not be sent. Check VS Code terminal.');
+            return res.status(500).send(
+                'Email could not be sent. Please try again later.'
+            );
         }
 
         console.log('Email sent:', info.response);
@@ -206,18 +236,7 @@ app.post('/contact', (req, res) => {
     });
 });
 
-
-
-app.listen(PORT,()=>{
-    console.log("Listening on "+PORT)
-})
-
-
-
-
-// http://localhost:3000 --- run chrome
-// E:\Node\Book Store> ---node index.js
-// cd "E:\Node\Book Store"
-
-
-
+// Start Server
+app.listen(PORT, () => {
+    console.log('Listening on ' + PORT);
+});
