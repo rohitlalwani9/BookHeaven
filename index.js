@@ -60,11 +60,17 @@ app.use((req, res, next) => {
 
 // Email Setup
 const transport = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    family: 4,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
-    }
+    },
+    connectionTimeout: 20000,
+    greetingTimeout: 20000,
+    socketTimeout: 30000
 });
 
 transport.verify((error) => {
@@ -74,6 +80,7 @@ transport.verify((error) => {
         console.log('SMTP server is ready');
     }
 });
+
 
 // Home
 app.get('/', (req, res) => {
@@ -213,28 +220,29 @@ app.get('/contact', (req, res) => {
 });
 
 // Contact Form
-app.post('/contact', (req, res) => {
-    const name = req.body.name;
-    const email = req.body.email;
-    const mobile = req.body.mob;
-    const message = req.body.message;
 
-    transport.sendMail({
-        to: 'rohitlalwani4550@gmail.com',
-        subject: 'New Customer Message',
-        text: `Name: ${name}\nEmail: ${email}\nMobile: ${mobile}\nMessage: ${message}`
-    }, (error, info) => {
-        if (error) {
-            console.error('EMAIL ERROR:', error);
-            return res.status(500).send(
-                'Email could not be sent. Please try again later.'
-            );
-        }
+app.post('/contact', async (req, res) => {
+    const { name, email, mob, message } = req.body;
+
+    try {
+        const info = await transport.sendMail({
+            from: process.env.EMAIL_USER,
+            to: 'rohitlalwani4550@gmail.com',
+            replyTo: email,
+            subject: 'New Customer Message',
+            text: `Name: ${name}\nEmail: ${email}\nMobile: ${mob}\nMessage: ${message}`
+        });
 
         console.log('Email sent:', info.response);
         return res.redirect('/contact');
-    });
+    } catch (error) {
+        console.error('EMAIL ERROR:', error);
+        return res.status(500).send(
+            'Email could not be sent. Please try again later.'
+        );
+    }
 });
+
 
 // Start Server
 app.listen(PORT, () => {
