@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHeaven | Discover Your Next Story</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-stone-50 text-stone-800">
+
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Hero Section -->
+    <section class="bg-stone-950 text-white">
+        <div class="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+
+            <div>
+                <p class="text-amber-400 uppercase tracking-[0.25em] text-sm font-semibold mb-5">
+                    Welcome to BookHaven
+                </p>
+
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                    Every Book
+                    <span class="text-amber-400">Opens</span>
+                    a New World.
+                </h1>
+
+                <p class="text-stone-300 text-lg mt-6 leading-relaxed max-w-lg">
+                    Discover stories that inspire you, ideas that change you,
+                    and books you'll want to read again and again.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <a href="/books"
+                       class="bg-amber-400 text-stone-950 font-bold px-7 py-3 rounded-lg hover:bg-amber-300 transition">
+                        Explore Books →
+                    </a>
+
+                    <a href="/category"
+                       class="border border-stone-500 px-7 py-3 rounded-lg hover:border-amber-400 hover:text-amber-400 transition">
+                        Browse Categories
+                    </a>
+                </div>
+
+                <div class="flex gap-8 mt-12 border-t border-stone-700 pt-6">
+                    <div>
+                        <p class="text-2xl font-bold text-amber-400">Explore</p>
+                        <p class="text-stone-400 text-sm mt-1">New ideas</p>
+                    </div>
+
+                    <div>
+                        <p class="text-2xl font-bold text-amber-400">Discover</p>
+                        <p class="text-stone-400 text-sm mt-1">Great stories</p>
+                    </div>
+
+                    <div>
+                        <p class="text-2xl font-bold text-amber-400">Enjoy</p>
+                        <p class="text-stone-400 text-sm mt-1">Every page</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="absolute inset-4 bg-amber-400 rounded-3xl rotate-3"></div>
+
+                <div class="relative bg-stone-900 border border-stone-700 rounded-3xl p-8 md:p-12">
+                    <p class="text-amber-400 text-sm uppercase tracking-widest mb-8">
+                        Your next chapter starts here
+                    </p>
+
+                    <div class="space-y-5">
+                        <div class="bg-stone-800 rounded-xl p-5 flex items-center gap-4">
+                            <span class="text-3xl">📚</span>
+                            <div>
+                                <h2 class="font-bold text-lg">Find Your Favourite</h2>
+                                <p class="text-stone-400 text-sm">Explore books for every mood.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-stone-800 rounded-xl p-5 flex items-center gap-4">
+                            <span class="text-3xl">✨</span>
+                            <div>
+                                <h2 class="font-bold text-lg">Discover Something New</h2>
+                                <p class="text-stone-400 text-sm">Let a new story surprise you.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-stone-800 rounded-xl p-5 flex items-center gap-4">
+                            <span class="text-3xl">🛒</span>
+                            <div>
+                                <h2 class="font-bold text-lg">Build Your Collection</h2>
+                                <p class="text-stone-400 text-sm">Add your next read to your cart.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="max-w-7xl mx-auto px-6 py-16 md:py-20">
+
+        <div class="text-center mb-10">
+            <p class="text-amber-700 uppercase tracking-widest text-sm font-semibold">
+                Find Your Interest
+            </p>
+
+            <h2 class="text-3xl md:text-4xl font-bold mt-3">
+                Explore the World of Books
+            </h2>
+
+            <p class="text-stone-500 mt-4 max-w-xl mx-auto">
+                From inspiring real-life lessons to unforgettable fictional
+                worlds, your next favourite read is waiting.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <a href="/category"
+               class="group bg-white border border-stone-200 rounded-2xl p-7 hover:border-amber-400 hover:shadow-lg transition">
+                <span class="text-4xl">🧠</span>
+                <h3 class="text-xl font-bold mt-5 group-hover:text-amber-700">
+                    Personal Growth
+                </h3>
+                <p class="text-stone-500 mt-2">
+                    Books to build better habits and fresh perspectives.
+                </p>
+                <p class="text-amber-700 font-semibold mt-5">
+                    Explore books →
+                </p>
+            </a>
+
+            <a href="/category"
+               class="group bg-white border border-stone-200 rounded-2xl p-7 hover:border-amber-400 hover:shadow-lg transition">
+                <span class="text-4xl">🪄</span>
+                <h3 class="text-xl font-bold mt-5 group-hover:text-amber-700">
+                    Fiction & Fantasy
+                </h3>
+                <p class="text-stone-500 mt-2">
+                    Step into magical worlds and unforgettable adventures.
+                </p>
+                <p class="text-amber-700 font-semibold mt-5">
+                    Explore books →
+                </p>
+            </a>
+
+            <a href="/category"
+               class="group bg-white border border-stone-200 rounded-2xl p-7 hover:border-amber-400 hover:shadow-lg transition">
+                <span class="text-4xl">💰</span>
+                <h3 class="text-xl font-bold mt-5 group-hover:text-amber-700">
+                    Knowledge & Finance
+                </h3>
+                <p class="text-stone-500 mt-2">
+                    Learn about money, life, and the world around you.
+                </p>
+                <p class="text-amber-700 font-semibold mt-5">
+                    Explore books →
+                </p>
+            </a>
+
+        </div>
+
+        <div class="text-center mt-10">
+            <a href="/books"
+               class="inline-block bg-stone-950 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-500 hover:text-stone-950 transition">
+                View All Books
+            </a>
+        </div>
+
+    </section>
+
+    <!-- Closing Banner -->
+    <section class="px-6 pb-16">
+        <div class="max-w-7xl mx-auto bg-amber-100 border border-amber-200 rounded-2xl p-8 md:p-12 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold">
+                A Great Book Can Change Your Day.
+            </h2>
+
+            <p class="text-stone-600 mt-3">
+                Start exploring and find the story meant for you.
+            </p>
+
+            <a href="/books"
+               class="inline-block mt-6 bg-stone-950 text-white px-7 py-3 rounded-lg font-semibold hover:bg-stone-800 transition">
+                Start Exploring
+            </a>
+        </div>
+    </section>
+
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>

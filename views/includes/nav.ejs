@@ -1,0 +1,23 @@
+
+<nav class="bg-stone-950 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-5 py-4 flex flex-wrap items-center justify-between gap-4">
+
+        <a href="/" class="text-2xl font-bold tracking-wide">
+            Book<span class="text-amber-400">Heaven</span>
+        </a>
+
+        <div class="flex flex-wrap items-center gap-5 text-sm md:text-base font-medium">
+            <a href="/" class="hover:text-amber-400 transition">Home</a>
+            <a href="/books" class="hover:text-amber-400 transition">Books</a>
+            <a href="/category" class="hover:text-amber-400 transition">Categories</a>
+            <a href="/about" class="hover:text-amber-400 transition">About</a>
+            <a href="/contact" class="hover:text-amber-400 transition">Contact</a>
+
+            <a href="/cart"
+               class="bg-amber-400 text-stone-950 px-4 py-2 rounded-full font-bold hover:bg-amber-300 transition">
+                🛒 Cart (<%= (typeof cartCount !== 'undefined' ? cartCount : 0) %>)
+            </a>
+        </div>
+
+    </div>
+</nav>

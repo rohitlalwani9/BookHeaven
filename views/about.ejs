@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | BookHeaven</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-stone-50 text-stone-800">
+
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Hero Header -->
+    <section class="bg-stone-950 text-white px-6 py-14 md:py-20">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-amber-400 uppercase tracking-widest text-sm font-semibold">
+                The Story Behind BookHaven
+            </p>
+
+            <h1 class="text-4xl md:text-5xl font-bold mt-3">
+                More Than Books. <span class="text-amber-400">A World of Ideas.</span>
+            </h1>
+
+            <p class="text-stone-300 mt-5 max-w-2xl text-lg leading-relaxed">
+                We believe every book has the power to inspire curiosity,
+                encourage learning, and open the door to something new.
+            </p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <main class="max-w-7xl mx-auto px-5 py-12 md:py-16">
+
+        <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+
+            <!-- Image -->
+            <div class="relative">
+                <div class="absolute inset-3 bg-amber-400 rounded-2xl rotate-3"></div>
+
+                <div class="relative bg-white rounded-2xl p-3 shadow-lg">
+                    <img
+                        src="/img1.png"
+                        alt="A book from the BookHaven collection"
+                        class="w-full h-[350px] md:h-[470px] object-contain rounded-xl bg-stone-100"
+                    >
+                </div>
+            </div>
+
+            <!-- Text -->
+            <div class="py-4">
+                <p class="text-amber-800 uppercase tracking-widest text-sm font-semibold">
+                    Welcome to BookHaven
+                </p>
+
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 leading-tight">
+                    A Little Place for Your Next Big Idea.
+                </h2>
+
+                <p class="text-stone-600 text-base md:text-lg leading-8 mt-6">
+                    Our bookstore is made for students and readers who love
+                    to learn, explore, and grow every day. We believe books
+                    are not just pages—they are tools that open new ideas,
+                    improve thinking, and build confidence.
+                </p>
+
+                <p class="text-stone-600 text-base md:text-lg leading-8 mt-4">
+                    From captivating stories to knowledge-filled books,
+                    every title offers an opportunity to discover something
+                    meaningful. Whether you are preparing for exams,
+                    developing a hobby, or searching for inspiration,
+                    our collection is here to support your journey.
+                </p>
+
+                <a href="/books"
+                   class="inline-block mt-7 bg-stone-950 text-white font-semibold px-7 py-3 rounded-lg hover:bg-amber-400 hover:text-stone-950 transition">
+                    Explore Our Books →
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Our Values -->
+        <section class="mt-20">
+            <div class="text-center mb-10">
+                <p class="text-amber-800 uppercase tracking-widest text-sm font-semibold">
+                    What We Believe
+                </p>
+
+                <h2 class="text-3xl md:text-4xl font-bold mt-3">
+                    The Values Behind Every Page
+                </h2>
+
+                <p class="text-stone-500 mt-3 max-w-xl mx-auto">
+                    Reading is a journey, and these are the things that make it worthwhile.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div class="bg-white border border-stone-200 rounded-2xl p-7 hover:border-amber-400 hover:shadow-lg transition">
+                    <div class="w-14 h-14 rounded-xl bg-amber-100 flex items-center justify-center text-3xl">
+                        📚
+                    </div>
+
+                    <h3 class="text-xl font-bold mt-5">Lifelong Learning</h3>
+
+                    <p class="text-stone-500 leading-7 mt-3">
+                        Every book gives us a chance to learn something new
+                        and see the world from a different perspective.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-stone-200 rounded-2xl p-7 hover:border-amber-400 hover:shadow-lg transition">
+                    <div class="w-14 h-14 rounded-xl bg-amber-100 flex items-center justify-center text-3xl">
+                        💡
+                    </div>
+
+                    <h3 class="text-xl font-bold mt-5">Curiosity & Discovery</h3>
+
+                    <p class="text-stone-500 leading-7 mt-3">
+                        We encourage readers to ask questions, discover
+                        fresh ideas, and explore beyond the familiar.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-stone-200 rounded-2xl p-7 hover:border-amber-400 hover:shadow-lg transition">
+                    <div class="w-14 h-14 rounded-xl bg-amber-100 flex items-center justify-center text-3xl">
+                        🌱
+                    </div>
+
+                    <h3 class="text-xl font-bold mt-5">Personal Growth</h3>
+
+                    <p class="text-stone-500 leading-7 mt-3">
+                        The right book can inspire better habits, stronger
+                        confidence, and a lifelong love of reading.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Closing Banner -->
+        <section class="mt-16 bg-amber-100 border border-amber-200 rounded-2xl p-8 md:p-12 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold">
+                Your Next Chapter Starts Here.
+            </h2>
+
+            <p class="text-stone-600 mt-3">
+                Find a book that inspires you to think, dream, and grow.
+            </p>
+
+            <a href="/books"
+               class="inline-block mt-6 bg-stone-950 text-white px-7 py-3 rounded-lg font-semibold hover:bg-stone-800 transition">
+                Find Your Next Read
+            </a>
+        </section>
+
+    </main>
+
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | BookHeaven</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-stone-50 text-stone-800">
+
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Page Header -->
+    <section class="bg-stone-950 text-white px-6 py-14 md:py-16">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-amber-400 uppercase tracking-widest text-sm font-semibold">
+                We'd Love to Hear From You
+            </p>
+
+            <h1 class="text-4xl md:text-5xl font-bold mt-3">
+                Let's <span class="text-amber-400">Connect.</span>
+            </h1>
+
+            <p class="text-stone-300 mt-4 max-w-2xl leading-relaxed">
+                Have a question about our books or need assistance?
+                Send us a message and we'll be happy to hear from you.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <main class="max-w-7xl mx-auto px-5 py-12 md:py-16">
+
+        <div class="grid lg:grid-cols-5 gap-8 items-start">
+
+            <!-- Contact Information -->
+            <div class="lg:col-span-2 bg-stone-950 text-white rounded-2xl p-7 md:p-9">
+
+                <p class="text-amber-400 uppercase tracking-widest text-sm font-semibold">
+                    Get in Touch
+                </p>
+
+                <h2 class="text-2xl md:text-3xl font-bold mt-3">
+                    How Can We Help?
+                </h2>
+
+                <p class="text-stone-300 leading-7 mt-4">
+                    Your reading journey matters to us. Share your questions,
+                    suggestions or feedback through the form.
+                </p>
+
+                <div class="mt-9 space-y-6">
+
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 shrink-0 bg-stone-800 rounded-xl flex items-center justify-center text-2xl">
+                            📚
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Book Enquiries</h3>
+                            <p class="text-stone-400 text-sm mt-1">
+                                Questions about our collection.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 shrink-0 bg-stone-800 rounded-xl flex items-center justify-center text-2xl">
+                            💬
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Feedback & Suggestions</h3>
+                            <p class="text-stone-400 text-sm mt-1">
+                                Help us make BookHaven better.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 shrink-0 bg-stone-800 rounded-xl flex items-center justify-center text-2xl">
+                            ✉️
+                        </div>
+                        <div>
+                            <h3 class="font-bold">Send Us a Message</h3>
+                            <p class="text-stone-400 text-sm mt-1">
+                                Fill out the form and get in touch.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-10 pt-6 border-t border-stone-700">
+                    <p class="text-amber-400 font-semibold">
+                        Every great connection starts with a message.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Contact Form -->
+            <div class="lg:col-span-3 bg-white border border-stone-200 rounded-2xl shadow-sm p-6 md:p-10">
+
+                <h2 class="text-2xl font-bold">Send a Message</h2>
+
+                <p class="text-stone-500 mt-2 mb-8">
+                    Fill in the details below.
+                </p>
+
+                <form action="/contact" method="POST" class="space-y-6">
+
+                    <div>
+                        <label for="name" class="block text-sm font-semibold mb-2">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                            class="w-full border border-stone-300 rounded-lg px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition">
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+
+                        <div>
+                            <label for="email" class="block text-sm font-semibold mb-2">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                autocomplete="email"
+                                required
+                                class="w-full border border-stone-300 rounded-lg px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition">
+                        </div>
+
+                        <div>
+                            <label for="mob" class="block text-sm font-semibold mb-2">
+                                Mobile Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="mob"
+                                name="mob"
+                                placeholder="Enter mobile number"
+                                autocomplete="tel"
+                                required
+                                class="w-full border border-stone-300 rounded-lg px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition">
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-sm font-semibold mb-2">
+                            Your Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            placeholder="How can we help you?"
+                            required
+                            class="w-full border border-stone-300 rounded-lg px-4 py-3 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition resize-y"></textarea>
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="w-full bg-stone-950 text-white font-semibold py-3.5 px-6 rounded-lg hover:bg-amber-400 hover:text-stone-950 transition">
+                        Send Message →
+                    </button>
+
+                    <p class="text-xs text-stone-500 text-center">
+                        Please make sure your contact details are correct before submitting.
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | BookHaven</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-stone-50 text-stone-800">
+
+    <%- include('includes/nav.ejs') %>
+
+    <!-- Header -->
+    <section class="bg-stone-950 text-white px-6 py-14 md:py-20">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-amber-400 uppercase tracking-widest text-sm font-semibold">
+                Explore Your Interests
+            </p>
+
+            <h1 class="text-4xl md:text-5xl font-bold mt-3">
+                Browse by <span class="text-amber-400">Category.</span>
+            </h1>
+
+            <p class="text-stone-300 mt-4 max-w-xl">
+                Whether you want knowledge, adventure or inspiration,
+                find books that match your mood.
+            </p>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <main class="max-w-7xl mx-auto px-5 py-12 md:py-16">
+
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold">Discover Collections</h2>
+            <p class="text-stone-500 mt-2">
+                Select a category to explore its available books.
+            </p>
+        </div>
+
+        <% if (categories.length === 0) { %>
+
+            <div class="bg-white border border-stone-200 rounded-2xl p-10 text-center">
+                <p class="text-5xl mb-4">📚</p>
+                <h2 class="text-xl font-bold">No Categories Yet</h2>
+                <p class="text-stone-500 mt-2">
+                    Categories will appear here when books are available.
+                </p>
+                <a href="/books"
+                   class="inline-block mt-5 bg-stone-950 text-white px-6 py-3 rounded-lg">
+                    Explore All Books
+                </a>
+            </div>
+
+        <% } else { %>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <% categories.forEach((category, index) => { %>
+
+                    <a href="/category/<%= encodeURIComponent(category) %>"
+                       class="group relative overflow-hidden bg-white border border-stone-200 rounded-2xl p-7 md:p-8 hover:border-amber-400 hover:shadow-xl transition duration-300">
+
+                        <div class="flex items-start justify-between">
+                            <div class="bg-amber-100 w-14 h-14 rounded-xl flex items-center justify-center text-3xl group-hover:bg-amber-200 transition">
+                                <%= ['📖', '✨', '🧠', '🪄', '🌍', '💡'][index % 6] %>
+                            </div>
+
+                            <span class="text-stone-300 text-2xl group-hover:text-amber-500 group-hover:translate-x-1 transition">
+                                ↗
+                            </span>
+                        </div>
+
+                        <h3 class="text-xl font-bold mt-6 group-hover:text-amber-800 transition">
+                            <%= category %>
+                        </h3>
+
+                        <p class="text-stone-500 mt-2 leading-relaxed">
+                            Discover books and find your next great read in this collection.
+                        </p>
+
+                        <div class="mt-6 pt-4 border-t border-stone-100">
+                            <span class="text-amber-800 font-semibold">
+                                Explore Collection →
+                            </span>
+                        </div>
+
+                    </a>
+
+                <% }) %>
+
+            </div>
+
+        <% } %>
+
+        <div class="mt-14 bg-amber-100 border border-amber-200 rounded-2xl p-8 md:p-10 text-center">
+            <h2 class="text-2xl font-bold">Still Exploring?</h2>
+            <p class="text-stone-600 mt-3">
+                Browse our complete collection and discover something unexpected.
+            </p>
+
+            <a href="/books"
+               class="inline-block mt-6 bg-stone-950 text-white px-7 py-3 rounded-lg font-semibold hover:bg-stone-800 transition">
+                View All Books →
+            </a>
+        </div>
+
+    </main>
+
+    <%- include('includes/footer.ejs') %>
+
+</body>
+</html>
