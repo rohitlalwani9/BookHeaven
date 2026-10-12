@@ -30,6 +30,18 @@ const bookSchema = new mongoose.Schema({
 
 const Book = mongoose.model('Book', bookSchema);
 
+
+const contactSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    mobile: String,
+    message: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
+});
+
+const Contact = mongoose.model('Contact', contactSchema);
+
+
 // Express Setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -221,27 +233,31 @@ app.get('/contact', (req, res) => {
 
 // Contact Form
 
-app.post('/contact', async (req, res) => {
-    const { name, email, mob, message } = req.body;
 
+app.post('/contact', async (req, res) => {
     try {
-        const info = await transport.sendMail({
-            from: process.env.EMAIL_USER,
-            to: 'rohitlalwani4550@gmail.com',
-            replyTo: email,
-            subject: 'New Customer Message',
-            text: `Name: ${name}\nEmail: ${email}\nMobile: ${mob}\nMessage: ${message}`
+        const { name, email, mob, message } = req.body;
+
+        await Contact.create({
+            name,
+            email,
+            mobile: mob,
+            message
         });
 
-        console.log('Email sent:', info.response);
-        return res.redirect('/contact');
+        return res.send(`
+            <h2>Thank you for contacting BookHeaven!</h2>
+            <p>Your message has been saved successfully.</p>
+            <a href="/contact">Back to Contact Us</a>
+        `);
     } catch (error) {
-        console.error('EMAIL ERROR:', error);
+        console.error('CONTACT FORM ERROR:', error);
         return res.status(500).send(
-            'Email could not be sent. Please try again later.'
+            'Unable to save your message. Please try again.'
         );
     }
 });
+
 
 
 // Start Server
